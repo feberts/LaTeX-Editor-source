@@ -20,6 +20,6 @@ jobs:
       - name: Write and push
         run: |
           cd ${{ github.workspace }}/pub_repo
-          echo "123" > ./README.md
+          echo "123" >> ./README.md
           cat ./README.md
           
