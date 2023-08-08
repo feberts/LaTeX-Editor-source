@@ -1,7 +1,7 @@
 name: Publish LaTeX Templates
 on: [push]
 jobs:
-  Publish templates:
+  Publish-templates:
     runs-on: ubuntu-latest
     steps:
       - name: Check out template repo
