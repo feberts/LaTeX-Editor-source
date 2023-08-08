@@ -19,10 +19,16 @@ jobs:
           path: pub_repo
       - name: Write and push
         run: |
+          mkdir ~/.ssh
+          echo "${{ secrets.DEPLOY_KEY_PUBLIC_REPO }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          eval $(ssh-agent -s)
+          ssh-add ~/.ssh/id_rsa
           cd ${{ github.workspace }}/pub_repo
-          echo "123" >> ./README.md
-          cat ./README.md
+          git remote set-url origin git@github.com:feberts/latex-dest.git
           git config user.name "Peter"
           git config user.email "noreply"
+          echo "123" >> ./README.md
+          cat ./README.md
           git commit -am "update"
-        
+          git push
