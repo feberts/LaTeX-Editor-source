@@ -1,0 +1,14 @@
+name: Publish LaTeX Templates
+on: [push]
+jobs:
+  Generate-Website:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out template repo
+        uses: actions/checkout@v3
+      - name: Create file
+        run: |
+          echo "Hallo Welt" > ./hallo
+          ls ${{ github.workspace }}
+          cat ./hallo
+          cat ./README.md
