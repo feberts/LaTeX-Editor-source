@@ -19,5 +19,5 @@ jobs:
           path: pub_repo
       - name: Run ls
         run: |
-          ls ${{ github.workspace }}/pub_repo
-          cat ${{ github.workspace }}/pub_repo/README.md
+          cd ${{ github.workspace }}/pub_repo
+          cat ./README.md
