@@ -22,4 +22,7 @@ jobs:
           cd ${{ github.workspace }}/pub_repo
           echo "123" >> ./README.md
           cat ./README.md
-          
+          git config user.name "Peter"
+          git config user.email "noreply"
+          git commit -am "update"
+        
