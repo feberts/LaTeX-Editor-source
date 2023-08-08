@@ -1,7 +1,7 @@
 name: Publish LaTeX Templates
 on: [push]
 jobs:
-  Publish-templates:
+  Publish-Templates:
     runs-on: ubuntu-latest
     steps:
       - name: Check out template repo
@@ -12,3 +12,7 @@ jobs:
           ls ${{ github.workspace }}
           cat ./hallo
           cat ./README.md
+      - name: Check public repo
+        uses: actions/checkout@v3
+        with:
+          repository: feberts/latex-dest
