@@ -28,7 +28,7 @@ jobs:
           git remote set-url origin git@github.com:feberts/latex-dest.git
           git config user.name "Peter"
           git config user.email "noreply"
-          echo "123" >> ./README.md
+          echo "abcdef" >> ./README.md
           cat ./README.md
           git commit -am "update"
           git push
