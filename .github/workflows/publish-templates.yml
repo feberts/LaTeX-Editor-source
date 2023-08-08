@@ -17,7 +17,8 @@ jobs:
         with:
           repository: feberts/latex-dest
           path: pub_repo
-      - name: Run ls
+      - name: Write and push
         run: |
           cd ${{ github.workspace }}/pub_repo
           cat ./README.md
+          echo "${{ secrets.TESTSECRET }}"
