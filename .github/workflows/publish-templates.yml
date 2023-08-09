@@ -13,18 +13,22 @@ jobs:
         with:
           repository: feberts/latex-dest
           path: website
-      - name: Write and push
+      - name: Work in remote repo
+        run: |
+          cd ${{ github.workspace }}/website
+          echo "Hallo!" > ./neu.md
+      - name: Set up SSH
         run: |
           mkdir ~/.ssh
           echo "${{ secrets.ID_RSA }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           eval $(ssh-agent -s)
           ssh-add ~/.ssh/id_rsa
+      - name: Commit and push to remote repo
+        run: |
           cd ${{ github.workspace }}/website
           git remote set-url origin git@github.com:feberts/latex-dest.git
-          git config user.name "Peter"
+          git config user.name "github action"
           git config user.email "noreply"
-          echo -e "\nbye" >> ./README.md
-          cat ./README.md
           git commit -am "update"
           git push
