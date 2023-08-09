@@ -16,20 +16,7 @@ jobs:
       - name: Write and push
         run: |
           echo Hallo
-          #cd ${{ github.workspace }}/website
-          #ls -l 
-          #cd ${{ github.workspace }}/templates
-          #ls -l 
-          #mkdir ~/.ssh
-          #echo "${{ secrets.ID_RSA }}" > ~/.ssh/id_rsa
-          #chmod 600 ~/.ssh/id_rsa
-          #eval $(ssh-agent -s)
-          #ssh-add ~/.ssh/id_rsa
-          #cd ${{ github.workspace }}/website
-          #git remote set-url origin git@github.com:feberts/latex-dest.git
-          #git config user.name "Peter"
-          #git config user.email "noreply"
-          #echo -e "\nhallo" >> ./README.md
-          #cat ./README.md
-          #git commit -am "update"
-          #git push
+          cd ${{ github.workspace }}/website
+          ls -l 
+          cd ${{ github.workspace }}/templates
+          ls -l 
