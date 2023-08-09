@@ -17,6 +17,6 @@ jobs:
         run: |
           echo Hallo
           cd ${{ github.workspace }}/website
-          ls -l 
+          cat README.md
           cd ${{ github.workspace }}/templates
-          ls -l 
+          cat README.md
