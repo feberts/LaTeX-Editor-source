@@ -16,7 +16,8 @@ jobs:
       - name: Work in remote repo
         run: |
           cd ${{ github.workspace }}/website
-          echo "Hallo!" > ./neu.md
+          git rm -r .
+          echo "Hallo!" > ./hallo.md
           git add .
       - name: Set up SSH
         run: |
