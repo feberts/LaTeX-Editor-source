@@ -17,6 +17,7 @@ jobs:
         run: |
           cd ${{ github.workspace }}/website
           echo "Hallo!" > ./neu.md
+          git add .
       - name: Set up SSH
         run: |
           mkdir ~/.ssh
