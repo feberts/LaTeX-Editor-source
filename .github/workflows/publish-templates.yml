@@ -17,11 +17,11 @@ jobs:
         run: |
           cd ${{ github.workspace }}/templates
           ./generate-website.sh
-      - name: Copy website to remote repo
+      - name: Add website to remote repo
         run: |
           cd ${{ github.workspace }}/website
           git rm -r .
-          echo "$(date +"%Y-%m-%d %H:%M:%S")" > ./time.md
+          cp -r ${{ github.workspace }}/templates/website_root/* .
           git add .
       - name: Set up SSH
         run: |
