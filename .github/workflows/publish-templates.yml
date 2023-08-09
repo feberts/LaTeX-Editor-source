@@ -15,10 +15,11 @@ jobs:
           path: website
       - name: Write and push
         run: |
-          cd ${{ github.workspace }}/website
-          ls -l 
-          cd ${{ github.workspace }}/templates
-          ls -l 
+          echo Hallo
+          #cd ${{ github.workspace }}/website
+          #ls -l 
+          #cd ${{ github.workspace }}/templates
+          #ls -l 
           #mkdir ~/.ssh
           #echo "${{ secrets.ID_RSA }}" > ~/.ssh/id_rsa
           #chmod 600 ~/.ssh/id_rsa
