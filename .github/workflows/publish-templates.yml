@@ -13,11 +13,14 @@ jobs:
         with:
           repository: feberts/latex-dest
           path: website
-      - name: Work in remote repo
+      - name: Generate website from templates
+        run: |
+          ./generate-website.sh
+      - name: Copy website to remote repo
         run: |
           cd ${{ github.workspace }}/website
           git rm -r .
-          echo "bye!" > ./bye.md
+          echo "$(date +"%Y-%m-%d %H:%M:%S")" > ./time.md
           git add .
       - name: Set up SSH
         run: |
