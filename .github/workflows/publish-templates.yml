@@ -15,9 +15,9 @@ jobs:
           path: website
       - name: Generate website from templates
         run: |
+          mkdir ${{ github.workspace }}/new_website
           cd ${{ github.workspace }}/templates
-          mkdir new_website
-          ./generate-website.sh new_website
+          ./generate-website.sh ${{ github.workspace }}/new_website
       - name: Add website to remote repo
         run: |
           cd ${{ github.workspace }}/website
