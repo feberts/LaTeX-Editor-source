@@ -5,7 +5,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       REMOTE_REPO: "feberts/latex-dest"
-      NEW_WEBSITE: "${{ github.workspace }}/new_website/"
     steps:
       - name: Check out this repo (templates)
         uses: actions/checkout@v3
@@ -18,15 +17,15 @@ jobs:
           path: website
       - name: Generate website from templates
         run: |
-          mkdir "$NEW_WEBSITE"
+          mkdir ${{ github.workspace }}/new_website/
           ls -l
           cd ${{ github.workspace }}/templates
-          ./generate-website.sh "$NEW_WEBSITE"
+          ./generate-website.sh ${{ github.workspace }}/new_website/
       - name: Add website to remote repo
         run: |
           cd ${{ github.workspace }}/website
           git rm -r .
-          cp -r "$NEW_WEBSITE"/* .
+          cp -r ${{ github.workspace }}/new_website/* .
           git add .
       - name: Set up SSH
         run: |
