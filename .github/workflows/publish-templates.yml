@@ -22,7 +22,7 @@ jobs:
         run: |
           cd ${{ github.workspace }}/website
           git rm -r .
-          cp -r ${{ github.workspace }}/templates/new_website/* .
+          cp -r ${{ github.workspace }}/new_website/* .
           git add .
       - name: Set up SSH
         run: |
