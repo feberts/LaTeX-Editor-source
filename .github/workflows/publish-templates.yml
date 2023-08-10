@@ -14,7 +14,7 @@ jobs:
       - name: Check out remote repo (website)
         uses: actions/checkout@v3
         with:
-          repository: feberts/latex-dest
+          repository: "$REMOTE_REPO"
           path: website
       - name: Generate website from templates
         run: |
@@ -38,7 +38,7 @@ jobs:
       - name: Commit and push to remote repo
         run: |
           cd ${{ github.workspace }}/website
-          git remote set-url origin "git@github.com:$REMOTE_REPO.git"
+          git remote set-url origin "git@github.com:${REMOTE_REPO}.git"
           git config user.name "github action"
           git config user.email "noreply"
           git commit -am "update"
