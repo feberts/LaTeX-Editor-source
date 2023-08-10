@@ -15,7 +15,7 @@ jobs:
           path: website
       - name: Generate website from templates
         run: |
-          NEW_WEBSITE=${{ github.workspace }}/new_website/
+          NEW_WEBSITE="${{ github.workspace }}/new_website/"
           mkdir "$NEW_WEBSITE"
           cd ${{ github.workspace }}/templates
           ./generate-website.sh "$NEW_WEBSITE"
