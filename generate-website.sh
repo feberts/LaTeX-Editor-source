@@ -1,7 +1,6 @@
 #!/bin/bash
 
 ROOT="$1"
-mkdir "$ROOT"
 echo "hallo abc" > "$ROOT"/hallo.txt
 mkdir "$ROOT"subdir
 echo "bye abc" > "$ROOT"/subdir/bye.txt
