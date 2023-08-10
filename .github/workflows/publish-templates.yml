@@ -40,5 +40,5 @@ jobs:
           git remote set-url origin "git@github.com:${REMOTE_REPO}.git"
           git config user.name "github action"
           git config user.email "noreply"
-          git commit -am "update"
+          git commit --allow-empty -am "update"
           git push
