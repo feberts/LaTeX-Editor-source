@@ -1,9 +1,9 @@
 #!/bin/bash
 
-ROOT="./website_root/"
+ROOT="$1"
 mkdir "$ROOT"
-echo "hallo 123" > "$ROOT"/hallo.txt
+echo "hallo abc" > "$ROOT"/hallo.txt
 mkdir "$ROOT"subdir
-echo "bye 123" > "$ROOT"/subdir/bye.txt
+echo "bye abc" > "$ROOT"/subdir/bye.txt
 mkdir "$ROOT"/subdir/subsubdir
-echo "ciao 123" > "$ROOT"/subdir/subsubdir/ciao.txt
+echo "ciao abc" > "$ROOT"/subdir/subsubdir/ciao.txt
