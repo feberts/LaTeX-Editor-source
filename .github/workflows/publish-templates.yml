@@ -15,14 +15,15 @@ jobs:
           path: website
       - name: Generate website from templates
         run: |
-          mkdir ${{ github.workspace }}/new_website
+          NEW_WEBSITE=${{ github.workspace }}/new_website/
+          mkdir "$NEW_WEBSITE"
           cd ${{ github.workspace }}/templates
-          ./generate-website.sh ${{ github.workspace }}/new_website
+          ./generate-website.sh "$NEW_WEBSITE"
       - name: Add website to remote repo
         run: |
           cd ${{ github.workspace }}/website
           git rm -r .
-          cp -r ${{ github.workspace }}/new_website/* .
+          cp -r "$NEW_WEBSITE"/* .
           git add .
       - name: Set up SSH
         run: |
