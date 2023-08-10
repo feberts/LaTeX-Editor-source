@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ROOT=./"$1"/
+ROOT="$1"/
 echo "new website: '$ROOT'"
 echo "hallo abc" > "$ROOT"/hallo.txt
 mkdir "$ROOT"subdir
