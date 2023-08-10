@@ -9,7 +9,7 @@ jobs:
       - name: Check out this repo (templates)
         uses: actions/checkout@v3
         with:
-          path: templates
+          path: this_repo
       - name: Check out remote repo (website)
         uses: actions/checkout@v3
         with:
@@ -18,7 +18,7 @@ jobs:
       - name: Generate website from templates
         run: |
           mkdir ${{ github.workspace }}/new_website/
-          cd ${{ github.workspace }}/templates
+          cd ${{ github.workspace }}/this_repo
           ./generate-website.sh ${{ github.workspace }}/new_website/
       - name: Add website to remote repo
         run: |
