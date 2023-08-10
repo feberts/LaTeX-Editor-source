@@ -4,6 +4,7 @@ jobs:
   Publish-Templates:
     runs-on: ubuntu-latest
     env:
+      REMOTE_REPO: "feberts/latex-dest"
       NEW_WEBSITE: "${{ github.workspace }}/new_website/"
     steps:
       - name: Check out this repo (templates)
@@ -37,7 +38,7 @@ jobs:
       - name: Commit and push to remote repo
         run: |
           cd ${{ github.workspace }}/website
-          git remote set-url origin git@github.com:feberts/latex-dest.git
+          git remote set-url origin "git@github.com:$REMOTE_REPO.git"
           git config user.name "github action"
           git config user.email "noreply"
           git commit -am "update"
