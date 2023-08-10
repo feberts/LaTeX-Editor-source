@@ -17,6 +17,7 @@ jobs:
         run: |
           cd ${{ github.workspace }}/templates
           mkdir new_website
+          ls -l
           ./generate-website.sh new_website
       - name: Add website to remote repo
         run: |
