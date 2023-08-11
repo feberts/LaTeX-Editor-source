@@ -1,6 +1,11 @@
 #!/bin/bash
 
 ROOT="$1"/
+CUSTOM_URL="$2"
+
+echo "$ROOT"
+echo "$CUSTOM_URL"
+
 echo "new website: '$ROOT'"
 echo "hallo abc" > "$ROOT"/hallo.txt
 mkdir "$ROOT"subdir
