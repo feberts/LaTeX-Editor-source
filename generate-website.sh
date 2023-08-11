@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ROOT="$1"/
-CUSTOM_URL="$2"
+CUSTOM_URL="$3"
 
 # echo "$ROOT"
 # echo "$CUSTOM_URL"
