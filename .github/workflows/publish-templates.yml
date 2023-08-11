@@ -20,7 +20,7 @@ jobs:
         run: |
           mkdir ${{ github.workspace }}/new_website/
           cd ${{ github.workspace }}/this_repo
-          ./generate-website.sh "${{ github.workspace }}/new_website/" "$REMOTE_CUSTOM_URL"
+          ./generate-website.sh "${{ github.workspace }}/new_website/" "$REMOTE_REPO" "$REMOTE_CUSTOM_URL"
       - name: Add website to remote repo
         run: |
           cd ${{ github.workspace }}/remote_repo
