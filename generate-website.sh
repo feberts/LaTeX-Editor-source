@@ -18,6 +18,4 @@ echo "<h1>Hallo</h1><p>no content</p>" > "$ROOT"/docs/index.html
 if [ -n "$CUSTOM_URL" ]
 then
     echo "$CUSTOM_URL" > "$ROOT"/docs/CNAME
-else
-    echo "leer" > "$ROOT"/docs/NO_CNAME
 fi
