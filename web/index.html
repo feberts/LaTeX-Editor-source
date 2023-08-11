@@ -1,12 +1,9 @@
 <!DOCTYPE html>
-<!-- <html lang="en"> -->
 <html lang="de">
     <head>
         <meta charset="utf-8">
-        <!-- <link rel="stylesheet" href="style.css"> -->
-        <!-- <link rel="icon" href="icon.svg"> -->
-        <title>LaTeX</title>
-        <script type="text/javascript" src="config.js"></script>
+        <title>Debug</title>
+        <script src="config.js"></script>
     </head>
     <body>
         <h1><script>document.write(template_name)</script></h1>
@@ -14,19 +11,20 @@
         <h2>Hauptdatei</h2>
         <p><script>document.write(main_tex_file)</script></p>
 
-        <h2>Projektdateien:</h2>
+        <h2>Projektdateien</h2>
         <script>
-        for(const file of files)
-        {
-            document.write(file + "<br>")
-        }
+            for(const file of files)
+            {
+                document.write(file + "<br>")
+            }
         </script>
 
-        <h2>Platzhalter:</h2>
+        <h2>Platzhalter</h2>
         <script>
-        for(const placeholder of placeholders)
-        {
-            document.write(placeholder + "<br>")
-        }
+            for(const placeholder of placeholders)
+            {
+                document.write(placeholder + "<br>")
+            }
         </script>
+    </body>
 </html>

@@ -9,7 +9,7 @@
 #                website from the latex templates.
 #
 #       OPTIONS: TARGET   target directory
-#                REPO     name of remote repository, 'user/reponame'
+#                REPO     name of remote repository, 'user/repository'
 #                DOMAIN   github custom domain (optional)
 #  REQUIREMENTS: ---
 #          BUGS: ---
@@ -21,6 +21,8 @@
 #
 # ==============================================================================
 
+DEBUG=0 # debug with: ./generate-website.sh remote_temp user/repo cname_entry
+
 function fatal
 {
     printf "$0: error: $1\n"
@@ -29,7 +31,7 @@ function fatal
 
 function debug
 {
-    printf "$1\n"
+    ((DEBUG)) && printf "$1\n"
     return
 }
 
@@ -37,17 +39,22 @@ function debug
 #  arguments
 # ------------------------------------------------------------------------------
 
-TARGET="$1"/ # remote repo root directory
-REPO="$2"    # name of remote repository
-DOMAIN="$3"  # github pages custom domain (optional)
-
-DOCS="$TARGET"/docs/ # html document root
-TEMPLATES=templates/ # local latex templates
-WEB=web/             # local website template
+TARGET="$1"/ # remote repository root directory
+REPO="$2"    # remote repository name
+DOMAIN="$3"  # remote repository github pages custom domain (optional)
 
 [ $# -lt 2 ] && fatal "too few arguments"
 
-# rm -rf "$TARGET" &>/dev/null; mkdir "$TARGET" # for local debugging only! TODO entfernen
+((DEBUG)) && rm -rf "$TARGET" &>/dev/null && mkdir "$TARGET"
+
+# ------------------------------------------------------------------------------
+#  variables
+# ------------------------------------------------------------------------------
+
+DOCS="$TARGET"/docs/ # remote repository html document root
+TEMPLATES=templates/ # local latex templates
+WEB=web/             # local website template
+SWIFT=swiftlatex/    # local swiftlatex modules
 
 # ------------------------------------------------------------------------------
 #  generate website
@@ -124,12 +131,13 @@ do
     # ---------- copy website files ----------
 
     cp -r "$WEB"/* "$DOCS"/"$template_name"/
+    cp -r "$SWIFT"/* "$DOCS"/"$template_name"/
 
     # ---------- add markdown link to readme ----------
 
     TEMPLATE_URL="$(echo "$URL"/"$template_name")"
     debug "    Link: $TEMPLATE_URL"
-    add_to_readme "* **${template_name}**: [${TEMPLATE_URL}](http://${TEMPLATE_URL})\n"
+    add_to_readme "* **${template_name}:** [${TEMPLATE_URL}](http://${TEMPLATE_URL})\n"
 done
 
 # ------------------------------------------------------------------------------
