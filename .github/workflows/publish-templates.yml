@@ -4,7 +4,7 @@ jobs:
   Publish-Templates:
     runs-on: ubuntu-latest
     env:
-      REMOTE_REPO: "feberts/latex-dest"
+      REMOTE_REPO: "feberts/LaTeX-Templates"
     steps:
       - name: Check out this repo (templates)
         uses: actions/checkout@v3
