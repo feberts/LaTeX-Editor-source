@@ -1,31 +1,16 @@
 <!DOCTYPE html>
 <html lang="de">
-    <head>
-        <meta charset="utf-8">
-        <title>Debug</title>
-        <script src="config.js"></script>
-    </head>
-    <body>
-        <h1>Template name</h1>
-        <p><script>document.write(template_name)</script></p>
-
-        <h2>Main TeX file</h2>
-        <p><script>document.write(main_tex_file)</script></p>
-
-        <h2>Project files</h2>
-        <script>
-            for(const file of files)
-            {
-                document.write(file + "<br>")
-            }
-        </script>
-
-        <h2>Placeholders</h2>
-        <script>
-            for(const placeholder of placeholders)
-            {
-                document.write(placeholder + "<br>")
-            }
-        </script>
-    </body>
+  <head>
+    <meta charset="utf-8">
+    <title>Minimalbeispiel</title>
+    <script src="PdfTeXEngine.js"></script>
+    <script src="compile_tex.js"></script>
+    <script src="config.js"></script>
+  </head>
+  <body>
+    <h1>Minimalbeispiel der SwiftLaTeX-API</h1>
+    <p>Dokument wird kompiliert, bitte warten ...</p>
+    <div id="pdfViewer"></div>
+    <script>compile();</script>
+  </body>
 </html>
