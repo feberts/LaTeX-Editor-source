@@ -2,12 +2,10 @@
 //
 //          FILE: editor.js
 //
-//         USAGE: This script is loaded with the html for the latex editor.
-//
+//         USAGE: ---
 //   DESCRIPTION: This file provides functions that load the swiftlatex engine,
-//                initialize the code editor, handle user input, compile the
-//                latex document and display the pdf.
-//
+//                initialize the code editor, compile the latex document and
+//                display the pdf.
 //       OPTIONS: ---
 //  REQUIREMENTS: ---
 //          BUGS: ---
@@ -37,15 +35,15 @@ const editor = ace.edit("editor");
 /*
  * initialize html
  */
-async function initialize_html()
+async function init_html()
 {
-    templatename.innerHTML = 'Vorlage: „' + template_name + '“';
+    templatename.innerHTML = 'Vorlage<br>„' + template_name + '“';
 }
 
 /*
  * initialize the editor
  */
-async function initialize_editor()
+async function init_editor()
 {
     // basic setup:
     editor.setTheme("ace/theme/monokai");
@@ -54,11 +52,23 @@ async function initialize_editor()
     editor.setFontSize(16);
     editor.setShowPrintMargin(false);
 
-    // add text from latex main file:
+    // read text from latex main file:
     const response = await fetch(main_tex_file);
-    const text = await response.text();
+    var text = await response.text();
+
+    // replace placeholders with form data:
+    placeholder_map.forEach(function(user_input, placeholder)
+    {
+        console.log('placeholder: ' + placeholder + ' = ' + user_input);
+        text = text.replaceAll('{{' + placeholder + '}}', user_input);
+    })
+
+    // paste text into editor:
     await editor.setValue(text);
     await editor.clearSelection();
+
+    // make editor visible:
+    document.getElementById("latex").style.display = "block";
 }
 
 // -----------------------------------------------------------------------------
@@ -123,7 +133,7 @@ async function add_image(filename)
 /*
  * initialize the tex engine
  */
-async function initialize_latex()
+async function init_latex()
 {
     await engine.loadEngine();
     engine.setTexliveEndpoint("http://tex.feb-dev.net:4711/");
@@ -147,7 +157,7 @@ async function compile()
 
     // disable compile button during compilation:
     compile_button.disabled = true;
-    compile_button.innerHTML = "Kompiliere ...";
+    compile_button.innerHTML = "Kompiliert ...";
 
     // pass editor text to engine, then compile:
     engine.writeMemFSFile(main_tex_file, editor.getValue());
@@ -176,12 +186,18 @@ async function compile()
 //  initialization
 // -----------------------------------------------------------------------------
 
+// if no placeholders were found, load editor immediately:
+if(placeholders.length === 0)
+{
+    load_editor();
+}
+
 /*
  * initialize all components; this function gets called, when the html is loaded
  */
 async function init()
 {
-    await initialize_html();
-    await initialize_editor();
-    await initialize_latex();
+    await init_html();
+    await init_editor();
+    await init_latex();
 }

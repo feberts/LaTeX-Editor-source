@@ -119,12 +119,13 @@ do
     add_to_config "];\n"
 
     # placeholders:
-    placeholders=($(grep -E --only-matching "{{[^{}]+}}" "$template_dir"/"$main_tex_file" | sed 's/[{}]//g'))
+    placeholders=($(grep -E --only-matching "{{[^{}]+}}" "$template_dir"/"$main_tex_file" | sed 's/ /§/g' | sed 's/[{}]//g'))
     add_to_config 'const placeholders = ['
     debug "    Placeholders: "
 
     for placeholder in "${placeholders[@]}"
     do
+        placeholder="$(echo "$placeholder" | sed 's/§/ /g')"
         add_to_config '"'"$placeholder"'",'
         debug "        '$placeholder'"
     done
