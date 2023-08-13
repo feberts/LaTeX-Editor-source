@@ -73,7 +73,7 @@ function add_to_readme
 }
 
 # remove the path from a filename
-function strip_parent_directory
+function strip_path
 {
     printf "${1##*/}"
 }
@@ -95,13 +95,13 @@ do
 
     # template name:
     template_name="${template_dir%/}" # strip trailing slash
-    template_name="$(strip_parent_directory "$template_name")"
+    template_name="$(strip_path "$template_name")"
     debug "    Template name: '$template_name'"
     add_to_config 'const template_name = "'"$template_name"'";'"\n"
 
     # main tex file (contains '\documentclass'):
     main_tex_file="$(grep -rl --fixed-strings '\documentclass' "$template_dir")"
-    main_tex_file="$(strip_parent_directory "$main_tex_file")"
+    main_tex_file="$(strip_path "$main_tex_file")"
     debug "    Main tex file: '$main_tex_file'"
     add_to_config 'const main_tex_file = "'"$main_tex_file"'";'"\n"
 
@@ -111,7 +111,7 @@ do
 
     for file in "$template_dir"*.* # only files
     do
-        file_name="$(strip_parent_directory "$file")"
+        file_name="$(strip_path "$file")"
         debug "        '$file_name'"
         add_to_config '"'"$file_name"'",'
     done

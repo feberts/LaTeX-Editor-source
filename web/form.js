@@ -30,16 +30,16 @@ function print_form()
     // generate input fields:
     for(const ph of placeholders)
     {
-        if(/^[^+]+\+$/.test(ph)) // text area input
+        if(/^.+ $/.test(ph)) // text area input (string ends with whitespace)
         {
             console.log("form: textarea");
-            let ph_text = ph.replaceAll('+', ''); // remove special character
-            document.write('<textarea name="' + ph + '" rows="5" cols="50">' + ph_text + '</textarea><br><br>');
+            let ph_text = ph.replaceAll(/ $/g, ''); // remove trailing whitespace
+            document.write('<textarea name="' + ph + '" rows="5">' + ph_text + '</textarea><br><br>');
         }
         else // line input
         {
             console.log("form: text");
-            document.write('<input type="text" name="' + ph + '" value="' + ph + '" size="50" required><br><br>');
+            document.write('<input type="text" name="' + ph + '" value="' + ph + '" required><br><br>');
         }
     }
 

@@ -37,7 +37,7 @@ const editor = ace.edit("editor");
  */
 async function init_html()
 {
-    templatename.innerHTML = 'Vorlage<br>„' + template_name + '“';
+    templatename.innerHTML = 'Vorlage „' + template_name + '“';
 }
 
 /*
