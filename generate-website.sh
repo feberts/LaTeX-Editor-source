@@ -21,7 +21,7 @@
 #
 # ==============================================================================
 
-DEBUG=0 # debug with: ./generate-website.sh remote_temp user/repo cname_entry
+DEBUG=0 # for local debugging run: ./generate-website.sh remote_temp user/repo cname_entry
 
 function fatal
 {
@@ -45,13 +45,11 @@ DOMAIN="$3"  # remote repository github pages custom domain (optional)
 
 [ $# -lt 2 ] && fatal "too few arguments"
 
-((DEBUG)) && rm -rf "$TARGET" &>/dev/null && mkdir "$TARGET"
-
 # ------------------------------------------------------------------------------
 #  variables
 # ------------------------------------------------------------------------------
 
-DOCS="$TARGET"/docs/ # remote repository html document root
+DOCS="$TARGET"/docs/ # remote repository web document root
 TEMPLATES=templates/ # local latex templates
 WEB=web/             # local website template
 SWIFT=swiftlatex/    # local swiftlatex modules
@@ -60,16 +58,21 @@ SWIFT=swiftlatex/    # local swiftlatex modules
 #  generate website
 # ------------------------------------------------------------------------------
 
+((DEBUG)) && rm -rf "$TARGET" &>/dev/null && mkdir "$TARGET"
+
+# add text to the configuration file
 function add_to_config
 {
     printf "$1" >> "$DOCS"/"$template_name"/config.js
 }
 
+# add text to the readme file
 function add_to_readme
 {
     printf "$1" >> "$TARGET"/README.md
 }
 
+# remove the path from a filename
 function strip_parent_directory
 {
     printf "${1##*/}"
@@ -148,3 +151,11 @@ if [ -n "$DOMAIN" ]
 then
     echo -n "$DOMAIN" > "$DOCS"/CNAME
 fi
+
+# ------------------------------------------------------------------------------
+#  copy latex templates to a seperate directory
+# ------------------------------------------------------------------------------
+
+# Tehnically this is NOT neccessary. It only makes it easier to download a tenplate without having to use the web frontend.
+
+cp -r "$TEMPLATES" "$TARGET"/Vorlagen
