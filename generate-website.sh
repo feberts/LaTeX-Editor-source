@@ -112,6 +112,12 @@ do
     for file in "$template_dir"*.* # only files
     do
         file_name="$(strip_path "$file")"
+
+        # do not include compiled pdfs:
+        main_pdf="${main_tex_file%.tex}".pdf
+        [[ "$file_name" == "$main_pdf" ]] && continue
+
+        # add to config:
         debug "        '$file_name'"
         add_to_config '"'"$file_name"'",'
     done

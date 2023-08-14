@@ -10,6 +10,7 @@
     <script src="PdfTeXEngine.js"></script>
     <script src="config.js"></script>
     <script src="form.js"></script>
+    <script type="module" src="download.js"></script>
     <title>LaTeX-Editor</title>
 </head>
 <body>
@@ -25,6 +26,7 @@
         <div id="pdfviewer"></div>
         <div id="menu">
             <button type="button" onclick="compile()" id="compilebutton" class="button" disabled>Initialisiere ...</button>
+            <button type="button" onclick="download()" class="button">Download</button>
         </div>
         <div id="texconsole">
             <h4>Konsolenausgabe:</h4>

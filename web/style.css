@@ -87,6 +87,9 @@ body
     cursor: pointer;
     /* letter-spacing: 0.05em; */
     text-transform: uppercase;
+    margin: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 form
