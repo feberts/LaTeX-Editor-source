@@ -26,12 +26,12 @@ import { downloadZip } from "https://cdn.jsdelivr.net/npm/client-zip/index.js"
 async function download()
 {
     let download_files = [];
-    
+
     // add project files to array:
     for(const file of files)
     {
         let file_add;
-        
+
         if(file === main_tex_file) // copy main tex file from editor
         {
             file_add = { name: file, lastModified: new Date(), input: editor.getValue() };
@@ -40,13 +40,19 @@ async function download()
         {
             file_add = await fetch(file);
         }
-        
+
         download_files.push(file_add);
     }
-    
+
+    // add files uploaded by the user:
+    for(const file of uploads)
+    {
+        download_files.push(file);
+    }
+
     // zip files:
     const zip = await downloadZip(download_files).blob();
-    
+
     // make and click a temporary link to download the archive:
     const link = document.createElement("a");
     link.href = URL.createObjectURL(zip);

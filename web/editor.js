@@ -26,7 +26,13 @@ const tex_console = document.getElementById("texconsole");
 const console_output = document.getElementById("texconsoleoutput");
 const pdfviewer = document.getElementById("pdfviewer");
 const templatename = document.getElementById("templatename");
+
+// -----------------------------------------------------------------------------
+//  variables
+// -----------------------------------------------------------------------------
+
 const editor = ace.edit("editor");
+const uploads = [];
 
 // -----------------------------------------------------------------------------
 //  initialize frontend

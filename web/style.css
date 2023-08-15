@@ -42,7 +42,7 @@ body
     /* color: rgb(39, 40, 34); */
 }
 
-#latex
+#latex, #texconsole, #uploadform
 {
     display: none;
 }
@@ -92,23 +92,31 @@ body
     margin-right: 10px;
 }
 
-form
+#placeholderform
 {
     text-align: center;
     margin-top: 25px;
     margin-bottom: 25px;
 }
 
-input, textarea
+#uploadform
+{
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+input[type=text], textarea
 {
     padding: 5px;
     border: 1px solid rgb(207, 207, 207);
     width: 50%;
 }
 
-#texconsole
+#closebutton
 {
-    display: none;
+    margin: 0px;
+    margin-left: 0px;
+    margin-top: 25px;
 }
 
 pre

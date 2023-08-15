@@ -25,7 +25,7 @@ let placeholders_found = true;
  */
 function print_form()
 {
-    document.write('<form action="javascript:form_handler()">');
+    document.write('<form action="javascript:form_handler()" id="placeholderform">');
 
     // generate input fields:
     for(const ph of placeholders)
