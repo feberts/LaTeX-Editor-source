@@ -150,6 +150,8 @@ async function init_latex()
     compile_button.disabled = false;
 }
 
+var compile_first_time = true;
+
 /*
  * compile document and display pdf
  */
@@ -166,8 +168,20 @@ async function compile()
     compile_button.innerHTML = "Kompiliert ...";
 
     // pass editor text to engine, then compile:
-    engine.writeMemFSFile(main_tex_file, editor.getValue());
+    var editor_text = editor.getValue();
+    editor_text = editor_text.replaceAll('backend=biber', 'backend=bibtex'); // because swiftlatex does not support biber
+    engine.writeMemFSFile(main_tex_file, editor_text);
+    
+    // compile document:
     let result = await engine.compileLaTeX();
+    
+    if(compile_first_time)
+    {
+        // get references and bibliography right:
+        result = await engine.compileLaTeX();
+        result = await engine.compileLaTeX();
+        compile_first_time = false;
+    }
 
     // display compile run console output:
     console_output.innerHTML = result.log;
