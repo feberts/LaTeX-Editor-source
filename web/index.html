@@ -36,15 +36,15 @@
         <div id="menu">
             <button type="button" onclick="compile()" id="compilebutton" class="button" disabled>Initialisiere ...</button>
             <button type="button" onclick="download()" class="button">Download</button>
-            <button type="button" onclick="open_upload_form()" id="uploadbutton" class="button">Upload</button>
+            <button type="button" onclick="open_upload_form()" class="button">Upload</button>
         </div>
     
         <!-- file upload -->
         <div id="uploadform">
             <p> Hochgeladene Dateien können anschließend im LaTeX-Dokument verwendet werden.</p>
             <form enctype="multipart/form-data">
-                <input type="file" id="fileupload">
-                <button type="button" onclick="upload()">Hochladen</button>
+                <input type="file" id="fileupload"><br>
+                <button type="button" onclick="upload()" id="uploadbutton">Hochladen</button>
             </form>
             <button type="button" onclick="close_upload_form()" class="button" id="closebutton">Upload abbrechen</button>
         </div>

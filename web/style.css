@@ -105,6 +105,11 @@ body
     margin-bottom: 25px;
 }
 
+#uploadbutton
+{
+    margin-top: 25px;
+}
+
 input[type=text], textarea
 {
     padding: 5px;

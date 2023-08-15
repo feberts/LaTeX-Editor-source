@@ -31,6 +31,7 @@ function open_upload_form()
  */
 function close_upload_form()
 {
+    document.getElementById("fileupload").value = "";
     document.getElementById("uploadform").style.display = "none";
 }
 
@@ -42,6 +43,15 @@ async function upload()
     var file = document.getElementById('fileupload');
     filename = file.value.split('\\').pop(); // strip path
 
+    // check if file was uploaded already:
+    if(uploads.find( item => item['name'] === filename ))
+    {
+        close_upload_form();
+        console.log('file already exists');
+        return;
+    }
+
+    // add file to project:
     if(file.files.length) // upload successful
     {
         var reader = new FileReader();
