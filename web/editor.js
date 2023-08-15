@@ -43,7 +43,7 @@ const uploads = [];
  */
 async function init_html()
 {
-    templatename.innerHTML = 'Vorlage „' + template_name + '“';
+    templatename.innerHTML = 'Vorlage „' + config_template_name + '“';
 }
 
 /*
@@ -59,7 +59,7 @@ async function init_editor()
     editor.setShowPrintMargin(false);
 
     // read text from latex main file:
-    const response = await fetch(main_tex_file);
+    const response = await fetch(config_main_tex_file);
     var text = await response.text();
 
     // replace placeholders with form data:
@@ -90,13 +90,13 @@ async function add_projectfiles_to_engine()
 {
     console.log("add files to engine:");
 
-    for(const file of files)
+    for(const file of config_project_files)
     {
         await add_file(file);
     }
 
-    await engine.setEngineMainFile(main_tex_file);
-    console.log(main_tex_file + " set as main file");
+    await engine.setEngineMainFile(config_main_tex_file);
+    console.log(config_main_tex_file + " set as main file");
 }
 
 /*
@@ -170,11 +170,11 @@ async function compile()
     // pass editor text to engine, then compile:
     var editor_text = editor.getValue();
     editor_text = editor_text.replaceAll('backend=biber', 'backend=bibtex'); // because swiftlatex does not support biber
-    engine.writeMemFSFile(main_tex_file, editor_text);
-    
+    engine.writeMemFSFile(config_main_tex_file, editor_text);
+
     // compile document:
     let result = await engine.compileLaTeX();
-    
+
     if(compile_first_time)
     {
         // get references and bibliography right:
@@ -207,7 +207,7 @@ async function compile()
 // -----------------------------------------------------------------------------
 
 // if no placeholders were found, load editor immediately:
-if(placeholders.length === 0)
+if(config_placeholders.length === 0)
 {
     load_editor();
 }

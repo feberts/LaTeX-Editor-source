@@ -21,7 +21,10 @@
 #
 # ==============================================================================
 
-DEBUG=0 # for local debugging run: ./generate-website.sh remote_temp user/repo cname_entry
+DEBUG=0
+
+# For local debugging run: ./generate-website.sh remote_temp user/repo cname_entry
+# This creates the web application in a local directory.
 
 function fatal
 {
@@ -97,16 +100,16 @@ do
     template_name="${template_dir%/}" # strip trailing slash
     template_name="$(strip_path "$template_name")"
     debug "    Template name: '$template_name'"
-    add_to_config 'const template_name = "'"$template_name"'";'"\n"
+    add_to_config 'const config_template_name = "'"$template_name"'";'"\n"
 
     # main tex file (contains '\documentclass'):
     main_tex_file="$(grep -rl --fixed-strings '\documentclass' "$template_dir")"
     main_tex_file="$(strip_path "$main_tex_file")"
     debug "    Main tex file: '$main_tex_file'"
-    add_to_config 'const main_tex_file = "'"$main_tex_file"'";'"\n"
+    add_to_config 'const config_main_tex_file = "'"$main_tex_file"'";'"\n"
 
     # project files:
-    add_to_config 'const files = ['
+    add_to_config 'const config_project_files = ['
     debug "    Project files:"
 
     for file in "$template_dir"*.* # only files
@@ -126,7 +129,7 @@ do
 
     # placeholders:
     placeholders=($(grep -E --only-matching "{{[^{}]+}}" "$template_dir"/"$main_tex_file" | sed 's/ /§/g' | sed 's/[{}]//g'))
-    add_to_config 'const placeholders = ['
+    add_to_config 'const config_placeholders = ['
     debug "    Placeholders: "
 
     for placeholder in "${placeholders[@]}"

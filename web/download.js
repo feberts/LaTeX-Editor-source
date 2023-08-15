@@ -28,11 +28,11 @@ async function download()
     let download_files = [];
 
     // add project files to array:
-    for(const file of files)
+    for(const file of config_project_files)
     {
         let file_add;
 
-        if(file === main_tex_file) // copy main tex file from editor
+        if(file === config_main_tex_file) // copy main tex file from editor
         {
             file_add = { name: file, lastModified: new Date(), input: editor.getValue() };
         }
@@ -56,7 +56,7 @@ async function download()
     // make and click a temporary link to download the archive:
     const link = document.createElement("a");
     link.href = URL.createObjectURL(zip);
-    link.download = template_name + '.zip';
+    link.download = config_template_name + '.zip';
     link.click();
     link.remove();
 }

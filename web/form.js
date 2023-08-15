@@ -28,7 +28,7 @@ function print_form()
     document.write('<form action="javascript:form_handler()" id="placeholderform">');
 
     // generate input fields:
-    for(const ph of placeholders)
+    for(const ph of config_placeholders)
     {
         if(/^.+ $/.test(ph)) // text area input (string ends with whitespace)
         {
@@ -52,7 +52,7 @@ function print_form()
  */
 function form_handler()
 {
-    for(const ph of placeholders)
+    for(const ph of config_placeholders)
     {
         placeholder_map.set(ph, document.getElementsByName(ph)[0].value);
     }

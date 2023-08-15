@@ -21,7 +21,7 @@
         <h2 id="templatename">Name der Vorlage</h2>
     </div>
 
-    <!-- placeholder form -->
+    <!-- placeholders input -->
     <div class="content" id="form">
         <div><script>print_form();</script></div>
     </div>
@@ -29,9 +29,10 @@
     <!-- main section -->
     <div class="content" id="latex">
 
-        <!-- editor, pdf viewer, menu -->
+        <!-- editor -->
         <div id="editor"></div>
-        <div id="pdfviewer"></div>
+        
+        <!-- menu -->
         <div id="menu">
             <button type="button" onclick="compile()" id="compilebutton" class="button" disabled>Initialisiere ...</button>
             <button type="button" onclick="download()" class="button">Download</button>
@@ -47,6 +48,9 @@
             </form>
             <button type="button" onclick="close_upload_form()" class="button" id="closebutton">Upload abbrechen</button>
         </div>
+        
+        <!-- pdf viewer -->
+        <div id="pdfviewer"></div>
     
         <!-- console output -->
         <div id="texconsole">
