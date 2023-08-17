@@ -3,10 +3,10 @@
 //          FILE: upload.js
 //
 //         USAGE: ---
-//   DESCRIPTION: This file provides functionality to allow the user to upload
-//                new files. The files are added to the swiftlatex engine and
-//                and can be referenced in the latex file.
-//
+//   DESCRIPTION: This file provides functionality to allow the user to
+//                - upload new files. The files are added to the swiftlatex
+//                  engine and can be included in the document.
+//                - import a project. All currently existing files are deleted.
 //       OPTIONS: ---
 //  REQUIREMENTS: ---
 //          BUGS: ---
@@ -23,68 +23,148 @@
  */
 function open_upload_form()
 {
+    close_forms();
     document.getElementById("uploadform").style.display = "block";
 }
 
 /*
- * close the upload dialog
+ * show the import dialog
  */
-function close_upload_form()
+function open_import_form()
 {
-    document.getElementById("fileupload").value = "";
-    document.getElementById("uploadform").style.display = "none";
+    close_forms();
+    document.getElementById("importform").style.display = "block";
 }
 
 /*
- * add uploaded file to the project
+ * close all dialogs
+ */
+function close_forms()
+{
+    document.getElementById("fileupload").value = "";
+    document.getElementById("uploadform").style.display = "none";
+
+    document.getElementById("projectimport").value = "";
+    document.getElementById("importform").style.display = "none";
+}
+
+/*
+ * upload new file and add it to the project
  */
 async function upload()
 {
-    var file = document.getElementById('fileupload');
-    filename = file.value.split('\\').pop(); // strip path
+    upload_files('fileupload');
+    close_forms();
+}
 
-    // check if file was uploaded already:
-    if(uploads.find( item => item['name'] === filename ))
+/*
+ * import a project
+ */
+async function import_project()
+{
+    // disable compile button during import:
+    compile_button.disabled = true;
+
+    // remove all files:
+    engine.flushCache();
+    config_project_files = [];
+    config_placeholders = [];
+    uploads = [];
+
+    // add new files:
+    await upload_files('projectimport');
+    await new Promise(r => setTimeout(r, 1000)); // allow time to process files
+
+    // set new main file:
+    if(set_new_main_tex_file())
     {
-        close_upload_form();
-        console.log('file already exists');
-        return;
+        compile_button.disabled = false;
+        message.style.display = "none";
+    }
+    else // no main file was found
+    {
+        set_editor_text('');
+        message.innerHTML = '<p style="color: red;">Keine TeX-Hauptdatei gefunden</p>';
+        message.style.display = "block";
     }
 
-    // add file to project:
-    if(file.files.length) // upload successful
+    // update frontend:
+    config_template_name = "Importiertes-Projekt";
+    init_html();
+    pdfviewer.innerHTML = ''; // close pdf viewer
+    tex_console.style.display = "none"; // close tex console
+    close_forms();
+}
+
+/*
+ * add one or more new files to the current project
+ */
+async function upload_files(id)
+{
+    var files = document.getElementById(id).files;
+
+    // iterate over uploaded files:
+    for(let i = 0; i < files.length; i++)
     {
         var reader = new FileReader();
+        var file = files[i];
 
-        if(/^.+\.(tex|bib|sty|cls)$/.test(filename)) // text based files
+        reader.onload = function(e) // reads a single file
         {
-            console.log('upload: ' + filename + ' as text');
+            var filename = files[i].name;
 
-            reader.onload = function(e)
+            // check if file was already uploaded:
+            if(uploads.find(item => item['name'] == filename)
+                || config_project_files.includes(filename))
             {
-                // add to latex engine:
-                engine.writeMemFSFile(filename, e.target.result);
-                // add to array of uploaded files:
-                uploads.push({ name: filename, lastModified: new Date(), input: e.target.result });
-            };
+                console.log('file already exists: ' + filename);
+                return;
+            }
 
-            reader.readAsBinaryString(file.files[0]);
+            // process file data:
+            var data = new Uint8Array(e.target.result);
+
+            if(/^.+\.(tex|bib|sty|cls)$/.test(filename)) // text based files
+            {
+                data = new TextDecoder().decode(data); // to string
+                console.log('add: ' + filename + ' as text');
+            }
+            else // binary files
+            {
+                // no action needed
+                console.log('add: ' + filename + ' as binary');
+            }
+
+            // add to latex engine:
+            engine.writeMemFSFile(filename, data);
+
+            // add to array of uploaded files:
+            uploads.push({ name: filename, lastModified: new Date(), input: data });
         }
-        else // binary files
+
+        await reader.readAsArrayBuffer(file);
+    }
+}
+
+/*
+ * determine and then add the new main tex file
+ */
+function set_new_main_tex_file()
+{
+    // search for main tex file (includes '\documentclass'):
+    for(const file of uploads)
+    {
+        console.log('looking at ' + file.name);
+
+        if(file.input.includes('\\documentclass'))
         {
-            console.log('upload: ' + filename + ' as binary');
+            config_main_tex_file = file.name;
+            set_main_tex_file();
+            set_editor_text(file.input);
 
-            reader.onload = function(e)
-            {
-                // add to latex engine:
-                engine.writeMemFSFile(filename, new Uint8Array(e.target.result));
-                // add to array of uploaded files:
-                uploads.push({ name: filename, lastModified: new Date(), input: new Uint8Array(e.target.result) });
-            };
-
-            reader.readAsArrayBuffer(file.files[0]);
+            return true;
         }
     }
 
-    close_upload_form();
+    return false;
 }

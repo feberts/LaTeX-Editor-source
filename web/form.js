@@ -3,8 +3,8 @@
 //          FILE: form.js
 //
 //         USAGE: ---
-//   DESCRIPTION: This file provides functions to generate the input form and
-//                handle the submitted data.
+//   DESCRIPTION: This file contains functions to generate the input form for
+//                placeholders and to handle the submitted data.
 //
 //       OPTIONS: ---
 //  REQUIREMENTS: ---

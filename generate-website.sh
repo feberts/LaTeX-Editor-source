@@ -100,16 +100,16 @@ do
     template_name="${template_dir%/}" # strip trailing slash
     template_name="$(strip_path "$template_name")"
     debug "    Template name: '$template_name'"
-    add_to_config 'const config_template_name = "'"$template_name"'";'"\n"
+    add_to_config 'var config_template_name = "'"$template_name"'";'"\n"
 
     # main tex file (contains '\documentclass'):
     main_tex_file="$(grep -rl --fixed-strings '\documentclass' "$template_dir")"
     main_tex_file="$(strip_path "$main_tex_file")"
     debug "    Main tex file: '$main_tex_file'"
-    add_to_config 'const config_main_tex_file = "'"$main_tex_file"'";'"\n"
+    add_to_config 'var config_main_tex_file = "'"$main_tex_file"'";'"\n"
 
     # project files:
-    add_to_config 'const config_project_files = ['
+    add_to_config 'var config_project_files = ['
     debug "    Project files:"
 
     for file in "$template_dir"*.* # only files
@@ -129,7 +129,7 @@ do
 
     # placeholders:
     placeholders=($(grep -E --only-matching "{{[^{}]+}}" "$template_dir"/"$main_tex_file" | sed 's/ /§/g' | sed 's/[{}]//g'))
-    add_to_config 'const config_placeholders = ['
+    add_to_config 'var config_placeholders = ['
     debug "    Placeholders: "
 
     for placeholder in "${placeholders[@]}"
@@ -166,6 +166,6 @@ fi
 #  copy latex templates to a seperate directory
 # ------------------------------------------------------------------------------
 
-# Tehnically this is NOT neccessary. It only makes it easier to download a tenplate without having to use the web frontend.
+# Technically this is NOT necessary. It only makes it easier to download a template without having to use the web frontend.
 
 cp -r "$TEMPLATES" "$TARGET"/Vorlagen
