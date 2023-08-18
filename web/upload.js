@@ -53,7 +53,7 @@ function close_forms()
  */
 async function upload()
 {
-    upload_files('fileupload');
+    await upload_files('fileupload');
     close_forms();
 }
 
