@@ -144,6 +144,7 @@ async function upload_files(id)
         }
 
         await reader.readAsArrayBuffer(file);
+        await new Promise(r => setTimeout(r, 200));
     }
 }
 
