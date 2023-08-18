@@ -147,7 +147,7 @@ async function upload_files(id)
 }
 
 /*
- * determine and then add the new main tex file
+ * determine the new main tex file and add it to engine and editor
  */
 function set_new_main_tex_file()
 {
