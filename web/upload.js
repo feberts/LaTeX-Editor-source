@@ -114,7 +114,7 @@ async function upload_files(id)
 
         reader.onload = function(e) // reads a single file
         {
-            var temp_name = filename;
+            let temp_name = filename;
             // check if file was already uploaded:
             if(uploads.find(item => item['name'] == temp_name)
                 || config_project_files.includes(temp_name))
