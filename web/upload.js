@@ -112,7 +112,6 @@ async function upload_files(id)
         var filename = file.name;
 
         await read_single_file(file, filename);
-        console.log('added ' + filename);
     }
 }
 
