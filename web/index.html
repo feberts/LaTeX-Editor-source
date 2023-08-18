@@ -41,7 +41,7 @@
             <button type="button" onclick="open_import_form()" class="button">Import</button>
             <button type="button" onclick="download()" class="button">Download</button>
         </div>
-    
+
         <!-- file upload -->
         <div id="uploadform">
             <h4>Dateien hinzufügen</h4>
@@ -58,12 +58,12 @@
             <h4>Projekt importieren</h4>
             <p>Import eines LaTeX-Projekts durch Hochladen aller zugehöriger Dateien.</p>
             <form enctype="multipart/form-data">
-                <input type="file" id="projectimport" multiple><br>
+                <input type="file" id="projectimport" accept="image/*,.tex,.bib,.sty,.cls,.pdf" multiple><br>
                 <button type="button" onclick="import_project()" class="uploadbutton">Hochladen</button>
             </form>
             <button type="button" onclick="close_forms()" class="closebutton">Abbrechen</button>
         </div>
-        
+
         <!-- message -->
         <div id="message"></div>
         
