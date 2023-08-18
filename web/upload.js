@@ -74,7 +74,7 @@ async function import_project()
 
     // add new files:
     await upload_files('projectimport');
-    await new Promise(r => setTimeout(r, 1000)); // allow time to process files
+    await new Promise(r => setTimeout(r, 1000));
 
     // set new main file:
     if(set_new_main_tex_file())
@@ -110,11 +110,10 @@ async function upload_files(id)
     {
         var reader = new FileReader();
         var file = files[i];
+        var filename = file.name;
 
         reader.onload = function(e) // reads a single file
         {
-            var filename = files[i].name;
-
             // check if file was already uploaded:
             if(uploads.find(item => item['name'] == filename)
                 || config_project_files.includes(filename))
