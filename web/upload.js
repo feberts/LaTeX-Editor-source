@@ -109,11 +109,11 @@ async function upload_files(id)
     for(let i = 0; i < files.length; i++)
     {
         var reader = new FileReader();
-        var file = files[i];
-        var filename = file.name;
 
         reader.onload = function(e) // reads a single file
         {
+        var file = files[i];
+        var filename = file.name;
             // check if file was already uploaded:
             if(uploads.find(item => item['name'] == filename)
                 || config_project_files.includes(filename))
@@ -144,7 +144,7 @@ async function upload_files(id)
         }
 
         await reader.readAsArrayBuffer(file);
-        await new Promise(r => setTimeout(r, 200));
+//         await new Promise(r => setTimeout(r, 200));
     }
 }
 
