@@ -97,8 +97,6 @@ async function import_project()
     close_forms();
 }
 
-var upload_filename;
-
 /*
  * add one or more new files to the current project
  */
@@ -111,37 +109,38 @@ async function upload_files(id)
     {
         var reader = new FileReader();
         var file = files[i];
-        upload_filename = files[i].name;
 
-        reader.onload = function(f) // reads a single file
+        reader.onload = function(e) // reads a single file
         {
+            var filename = files[i].name;
+
             // check if file was already uploaded:
-            if(uploads.find(item => item['name'] == upload_filename)
-                || config_project_files.includes(upload_filename))
+            if(uploads.find(item => item['name'] == filename)
+                || config_project_files.includes(filename))
             {
-                console.log('file already exists: ' + upload_filename);
+                console.log('file already exists: ' + filename);
                 return;
             }
 
             // process file data:
-            var data = new Uint8Array(f.target.result);
+            var data = new Uint8Array(e.target.result);
 
-            if(/^.+\.(tex|bib|sty|cls)$/.test(upload_filename)) // text based files
+            if(/^.+\.(tex|bib|sty|cls)$/.test(filename)) // text based files
             {
                 data = new TextDecoder().decode(data); // to string
-                console.log('add: ' + upload_filename + ' as text');
+                console.log('add: ' + filename + ' as text');
             }
             else // binary files
             {
                 // no action needed
-                console.log('add: ' + upload_filename + ' as binary');
+                console.log('add: ' + filename + ' as binary');
             }
 
             // add to latex engine:
-            engine.writeMemFSFile(upload_filename, data);
+            engine.writeMemFSFile(filename, data);
 
             // add to array of uploaded files:
-            uploads.push({ name: upload_filename, lastModified: new Date(), input: data });
+            uploads.push({ name: filename, lastModified: new Date(), input: data });
         }
 
         await reader.readAsArrayBuffer(file);
