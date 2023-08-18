@@ -34,7 +34,7 @@ function print_form()
         {
             console.log("form: textarea");
             let ph_text = ph.replaceAll(/ $/g, ''); // remove trailing whitespace
-            document.write('<textarea name="' + ph + '" rows="5">' + ph_text + '</textarea><br><br>');
+            document.write('<textarea name="' + ph + '" rows="5" required>' + ph_text + '</textarea><br><br>');
         }
         else // line input
         {
