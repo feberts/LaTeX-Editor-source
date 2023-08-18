@@ -154,8 +154,6 @@ function set_new_main_tex_file()
     // search for main tex file (includes '\documentclass'):
     for(const file of uploads)
     {
-        console.log('looking at ' + file.name);
-
         if(file.input.includes('\\documentclass'))
         {
             config_main_tex_file = file.name;

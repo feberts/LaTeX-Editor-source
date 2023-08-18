@@ -215,7 +215,6 @@ async function compile()
         const pdfblob = new Blob([result.pdf], { type : 'application/pdf' });
         const objectURL = URL.createObjectURL(pdfblob);
         setTimeout(()=>{ URL.revokeObjectURL(objectURL); }, 30000);
-        console.log(objectURL);
         pdfviewer.innerHTML = `<embed src="${objectURL}" id="pdfviewerinner" type="application/pdf">`;
     }
 }
