@@ -49,12 +49,12 @@ function close_forms()
 }
 
 /*
- * upload new file and add it to the project
+ * upload new files and add them to the project
  */
 async function upload()
 {
     await upload_files('fileupload');
-    await new Promise(r => setTimeout(r, 10));
+    await new Promise(r => setTimeout(r, 50));
     close_forms();
 }
 
@@ -74,7 +74,7 @@ async function import_project()
 
     // add new files:
     await upload_files('projectimport');
-    await new Promise(r => setTimeout(r, 10));
+    await new Promise(r => setTimeout(r, 50));
 
     // set new main file:
     if(set_new_main_tex_file())
@@ -99,53 +99,62 @@ async function import_project()
 }
 
 /*
- * add one or more new files to the current project
+ * read one or more files from an html file input element
+ * and add them to the current project
  */
 async function upload_files(id)
 {
     var files = document.getElementById(id).files;
 
-    // iterate over uploaded files:
     for(let i = 0; i < files.length; i++)
     {
-        var reader = new FileReader();
         var file = files[i];
         var filename = file.name;
 
-        reader.onload = function(e) // reads a single file
+        await read_single_file(file, filename);
+        console.log('added ' + filename);
+    }
+}
+
+/*
+ * read a single file and add it to the current project
+ */
+async function read_single_file(file, filename)
+{
+    var reader = new FileReader();
+
+    reader.onload = function(e) // reads a single file
+    {
+        // check if file was already uploaded:
+        if(uploads.find(item => item['name'] == filename)
+            || config_project_files.includes(filename))
         {
-            // check if file was already uploaded:
-            if(uploads.find(item => item['name'] == filename)
-                || config_project_files.includes(filename))
-            {
-                console.log('file already exists: ' + filename);
-                return;
-            }
-
-            // process file data:
-            var data = new Uint8Array(e.target.result);
-
-            if(/^.+\.(tex|bib|sty|cls)$/.test(filename)) // text based files
-            {
-                data = new TextDecoder().decode(data); // to string
-                console.log('add: ' + filename + ' as text');
-            }
-            else // binary files
-            {
-                // no action needed
-                console.log('add: ' + filename + ' as binary');
-            }
-
-            // add to latex engine:
-            engine.writeMemFSFile(filename, data);
-
-            // add to array of uploaded files:
-            uploads.push({ name: filename, lastModified: new Date(), input: data });
+            console.log('file already exists: ' + filename);
+            return;
         }
 
-        await reader.readAsArrayBuffer(file);
-        await new Promise(r => setTimeout(r, 10));
+        // process file data:
+        var data = new Uint8Array(e.target.result);
+
+        if(/^.+\.(tex|bib|sty|cls)$/.test(filename)) // text based files
+        {
+            data = new TextDecoder().decode(data); // to string
+            console.log('add: ' + filename + ' as text');
+        }
+        else // binary files
+        {
+            // no action needed
+            console.log('add: ' + filename + ' as binary');
+        }
+
+        // add to latex engine:
+        engine.writeMemFSFile(filename, data);
+
+        // add to array of uploaded files:
+        uploads.push({ name: filename, lastModified: new Date(), input: data });
     }
+
+    await reader.readAsArrayBuffer(file);
 }
 
 /*
