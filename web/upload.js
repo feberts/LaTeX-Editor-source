@@ -83,6 +83,7 @@ async function import_project()
     }
     else // no main file was found
     {
+        console.log('no main tex file found');
         set_editor_text('');
         message.innerHTML = '<p style="color: red;">Keine TeX-Hauptdatei gefunden</p>';
         message.style.display = "block";
