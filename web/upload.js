@@ -54,6 +54,7 @@ function close_forms()
 async function upload()
 {
     await upload_files('fileupload');
+    await new Promise(r => setTimeout(r, 1000));
     close_forms();
 }
 
