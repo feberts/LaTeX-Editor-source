@@ -8,9 +8,9 @@
 #   DESCRIPTION: This script is executed by the github action to generate a
 #                website from the latex templates.
 #
-#       OPTIONS: TARGET   target directory
-#                REPO     name of remote repository, 'user/repository'
-#                DOMAIN   github custom domain (optional)
+#       OPTIONS: TARGET   temporary target directory
+#                REPO     remote repository name ('user/repository')
+#                DOMAIN   github pages custom domain (optional)
 #  REQUIREMENTS: ---
 #          BUGS: ---
 #         NOTES: ---
@@ -42,7 +42,7 @@ function debug
 #  arguments
 # ------------------------------------------------------------------------------
 
-TARGET="$1"/ # remote repository root directory
+TARGET="$1"/ # temporary target directory
 REPO="$2"    # remote repository name
 DOMAIN="$3"  # remote repository github pages custom domain (optional)
 
@@ -52,10 +52,10 @@ DOMAIN="$3"  # remote repository github pages custom domain (optional)
 #  variables
 # ------------------------------------------------------------------------------
 
-DOCS="$TARGET"/docs/ # remote repository web document root
-TEMPLATES=templates/ # local latex templates
-WEB=web/             # local website template
-SWIFT=swiftlatex/    # local swiftlatex modules
+DOCS="$TARGET"/docs/ # web document root
+TEMPLATES=templates/ # latex templates
+WEB=web/             # website template
+SWIFT=swiftlatex/    # swiftlatex modules
 
 # ------------------------------------------------------------------------------
 #  generate website

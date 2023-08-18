@@ -60,8 +60,8 @@ async function init_editor()
     editor.setShowPrintMargin(false);
 
     // read text from latex main file:
-    const response = await fetch(config_main_tex_file);
-    var text = await response.text();
+    var text = await fetch(config_main_tex_file);
+    text = await text.text();
 
     // replace placeholders with form data:
     placeholder_map.forEach(function(user_input, placeholder)
@@ -127,8 +127,8 @@ async function add_file(filename)
  */
 async function add_text(filename)
 {
-    let raw = await fetch(filename);
-    let text = await raw.text();
+    let text = await fetch(filename);
+    text = await text.text();
     engine.writeMemFSFile(filename, text);
 }
 
@@ -137,8 +137,8 @@ async function add_text(filename)
  */
 async function add_image(filename)
 {
-    let raw = await fetch(filename);
-    let blob = await raw.arrayBuffer();
+    let blob = await fetch(filename);
+    blob = await blob.arrayBuffer();
     engine.writeMemFSFile(filename, new Uint8Array(blob));
 }
 
@@ -156,8 +156,9 @@ async function set_main_tex_file()
  */
 async function init_engine()
 {
+    // load engine and add files:
     await engine.loadEngine();
-    engine.setTexliveEndpoint("http://tex.feb-dev.net:4711/");
+    engine.setTexliveEndpoint(TEXLIVE_SERVER);
     await add_projectfiles_to_engine();
 
     // enable compile button:
