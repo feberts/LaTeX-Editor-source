@@ -212,7 +212,7 @@ async function compile()
     // if compiled successfully, display pdf:
     if(result.status === 0)
     {
-        const pdfblob = new Blob([result.pdf], { type : 'application/pdf' });
+        const pdfblob = new Blob([result.pdf], { name: 'test123', type : 'application/pdf' });
         const objectURL = URL.createObjectURL(pdfblob);
         setTimeout(()=>{ URL.revokeObjectURL(objectURL); }, 30000);
         pdfviewer.innerHTML = `<embed src="${objectURL}" id="pdfviewerinner" type="application/pdf">`;
