@@ -54,7 +54,7 @@ function close_forms()
 async function upload()
 {
     await upload_files('fileupload');
-    await new Promise(r => setTimeout(r, 50));
+    await new Promise(r => setTimeout(r, 500));
     close_forms();
 }
 
@@ -74,7 +74,7 @@ async function import_project()
 
     // add new files:
     await upload_files('projectimport');
-    await new Promise(r => setTimeout(r, 50));
+    await new Promise(r => setTimeout(r, 500));
 
     // set new main file:
     if(set_new_main_tex_file())
