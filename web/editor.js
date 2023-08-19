@@ -198,6 +198,7 @@ async function compile()
         // get references and bibliography right:
         result = await engine.compileLaTeX();
         result = await engine.compileLaTeX();
+        result = await engine.compileLaTeX();
         compile_first_time = false;
     }
 
