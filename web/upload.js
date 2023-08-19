@@ -91,7 +91,7 @@ async function import_project()
     }
 
     // update frontend:
-    config_template_name = "Importiertes-Projekt";
+    config_template_name = "Importiertes Projekt";
     templatename.innerHTML = config_template_name;
     pdfviewer.innerHTML = ''; // close pdf viewer
     tex_console.style.display = "none"; // close tex console
