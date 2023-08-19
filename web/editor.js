@@ -217,6 +217,10 @@ async function compile()
         setTimeout(()=>{ URL.revokeObjectURL(objectURL); }, 30000);
         pdfviewer.innerHTML = `<embed src="${objectURL}" id="pdfviewerinner" type="application/pdf">`;
     }
+    else
+    {
+        pdfviewer.innerHTML = ''; // close pdf viewer
+    }
 }
 
 // -----------------------------------------------------------------------------
