@@ -71,7 +71,7 @@ async function import_project()
     config_project_files = [];
     config_placeholders = [];
     uploads = [];
-    compile_first_time = false;
+    compile_first_time = true;
 
     // add new files:
     await upload_files('projectimport');
