@@ -34,6 +34,7 @@ const message = document.getElementById("message");
 
 const editor = ace.edit("editor");
 var uploads = [];
+var compile_first_time = true;
 
 // -----------------------------------------------------------------------------
 //  initialize frontend
@@ -165,8 +166,6 @@ async function init_engine()
     compile_button.innerHTML = "Kompilieren";
     compile_button.disabled = false;
 }
-
-var compile_first_time = true;
 
 /*
  * compile document and display pdf
