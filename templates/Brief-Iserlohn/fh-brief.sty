@@ -3,7 +3,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[ngerman]{babel}
 \usepackage{lmodern}
-\usepackage[left=20mm, right=20mm, top=45mm, bottom=35mm]{geometry}
+\usepackage[left=20mm, right=0mm, top=45mm, bottom=35mm]{geometry}
 \usepackage{helvet}\renewcommand{\familydefault}{\sfdefault}
 \usepackage{microtype}
 \clubpenalty=10000
@@ -13,23 +13,25 @@
 
 % Weitere Pakete:
 \usepackage{graphicx}
-\usepackage{xcolor}
+\usepackage[dvipsnames]{xcolor}
 
 % Rechter Seitenrand:
-\newcommand{\randbreite}{0.23\textwidth}
+\newcommand{\randbreite}{0.31\textwidth}
 
 % Kopf- und Fusszeile:
 \usepackage{lastpage}
 \usepackage[headsepline]{scrlayer-scrpage}
 \addtokomafont{pageheadfoot}{\normalshape\sffamily\small}
+\addtokomafont{headsepline}{\color{RoyalBlue}}
+\KOMAoptions{headsepline=0.75pt}
 \ihead{\includegraphics[width=60mm]{fh-header}\vspace{3mm}}
 \cfoot{Seite \thepage~von~\pageref*{LastPage}\hspace{\randbreite}}
-\ofoot{\includegraphics[width=30mm]{fh-footer}}
+\ofoot{\includegraphics[width=30mm]{fh-footer}\hspace{17mm}}
 % \ifoot{\null\\Schreiben vom\\\today}
 
 % Anschreiben:
 \newcommand{\sep}{$\cdot$~}
-\newenvironment{absender}{\footnotesize\vspace*{2mm}}{\vspace{6mm}}
+\newenvironment{absender}{\scriptsize\vspace*{2mm}}{\vspace{6mm}}
 \newenvironment{empfaenger}{\raggedright}{\vspace*{25mm}}
 \newenvironment{betreff}{\bfseries\raggedright}{\vspace{\baselineskip}}
 \newenvironment{text}{\parindent=0em \parskip=\baselineskip \noindent \ignorespaces}{}
