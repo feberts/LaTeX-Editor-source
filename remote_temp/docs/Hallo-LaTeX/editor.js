@@ -67,7 +67,7 @@ async function init_editor()
     // replace placeholders with form data:
     placeholder_map.forEach(function(user_input, placeholder)
     {
-        placeholder = placeholder.replaceAll('_', '\\'); // demask backslashes
+        placeholder = placeholder.replaceAll('_', '\\');
         console.log('placeholder: ' + placeholder + ' = ' + user_input);
         text = text.replaceAll('{{' + placeholder + '}}', user_input);
     })

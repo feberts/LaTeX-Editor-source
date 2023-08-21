@@ -21,10 +21,8 @@
 #
 # ==============================================================================
 
-DEBUG=0
-
-# For local debugging run: ./generate-website.sh remote_temp user/repo cname_entry
-# This creates the web application in a local directory.
+DEBUG=0 # For local debugging run: ./generate-website.sh remote_temp user/repo cname_entry
+        # This creates the web application in a local directory.
 
 function fatal
 {
@@ -128,13 +126,17 @@ do
     add_to_config "];\n"
 
     # placeholders:
-    placeholders=($(grep -E --only-matching "{{[^{}]+}}" "$template_dir"/"$main_tex_file" | sed 's/ /§/g' | sed 's/[{}]//g'))
+    # mask spaces before creating the array
+    placeholders=($(grep -E --only-matching "{{[^{}]+}}" "$template_dir"/"$main_tex_file" \
+        | sed 's/ /§/g' \
+        | sed 's/[{}]//g'))
     add_to_config 'var config_placeholders = ['
     debug "    Placeholders: "
 
     for placeholder in "${placeholders[@]}"
     do
-        placeholder="$(echo "$placeholder" | sed 's/§/ /g')"
+        # demask spaces, then mask backslashes:
+        placeholder="$(echo "$placeholder" | sed 's/§/ /g' | sed -E 's/\\/_/g')"
         add_to_config '"'"$placeholder"'",'
         debug "        '$placeholder'"
     done
