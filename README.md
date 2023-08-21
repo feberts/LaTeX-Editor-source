@@ -8,9 +8,9 @@
 
 ## Verwendung von Platzhaltern
 
-Im LaTeX-Dokument können zwei Arten von Platzhaltern verwendet werden. Aus diesen Platzhaltern generiert die Webanwendung eine Eingabemaske. Platzhalter werden in doppelte geschweifte Klammern gefasst:
+Im LaTeX-Dokument können zwei Arten von Platzhaltern verwendet werden. Aus diesen Platzhaltern generiert die Webanwendung eine Eingabemaske. Die Formularfelder unterstützen das Einfügen von LaTeX-Code. Platzhalter werden in doppelte geschweifte Klammern gefasst:
 
 - Textfelder für einzeilige Eingaben: bspw. `{{Titel}}` oder `{{Name des Autors}}`
 - Textfelder für mehrzeilige Eingaben. Dazu wird an den Platzhalter ein Leerzeichen angehängt: bspw. `{{Nachricht }}` oder `{{Adresse des Empfängers }}`
 
-Die Formularfelder unterstützen das Einfügen von LaTeX-Code.
+In Platzhaltern können LaTeX-Zeilenumbrüche (`\\`) verwendet werden, zum Beispiel `{{MfG\\Bob}}`. In mehrzeiligen Eingabefeldern werden diese um tatsächliche Zeilenumbrüche ergänzt, wobei die Rückstriche erhalten bleiben.
