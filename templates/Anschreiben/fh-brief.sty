@@ -14,6 +14,7 @@
 % Weitere Pakete:
 \usepackage{graphicx}
 \usepackage[dvipsnames]{xcolor}
+\usepackage{etoolbox}
 
 % Rechter Seitenrand:
 \newcommand{\randbreite}{0.31\textwidth}
@@ -96,12 +97,14 @@ Südwestfalen\\
 Sitz: Iserlohn
 
 \vspace{6mm}
-{\normalsize\bfseries\color{gray}
-Hagen\\
-{\color{black}Iserlohn}\\ % manuelle Hervorhebung des Standorts
-Lüdenscheid\\
-Meschede\\
-Soest}
+{
+  \normalsize\bfseries
+  \ifdefstring{\standort}{Hagen}{\color{black}Hagen}{\color{gray}Hagen}\\
+  \ifdefstring{\standort}{Iserlohn}{\color{black}Iserlohn}{\color{gray}Iserlohn}\\
+  \ifdefstring{\standort}{Lüdenscheid}{\color{black}Lüdenscheid}{\color{gray}Lüdenscheid}\\
+  \ifdefstring{\standort}{Meschede}{\color{black}Meschede}{\color{gray}Meschede}\\
+  \ifdefstring{\standort}{Soest}{\color{black}Soest}{\color{gray}Soest}
+}
 
 \vspace{4mm}
 www.fh-swf.de
