@@ -32,10 +32,17 @@
 
 % Anschreiben:
 \newcommand{\sep}{$\cdot$~}
-\newenvironment{absender}{\scriptsize\vspace*{2mm}}{\vspace{6mm}}
-\newenvironment{empfaenger}{\raggedright}{\vspace*{25mm}}
-\newenvironment{betreff}{\bfseries\raggedright}{\vspace{\baselineskip}}
-\newenvironment{text}{\parindent=0em \parskip=\baselineskip \noindent \ignorespaces}{}
+\newenvironment{absender}{\scriptsize\vspace*{2mm}}{\par\vspace{6mm}}
+\newenvironment{empfaenger}{\raggedright}{\par\vspace{25mm}}
+\newenvironment{betreff}{\bfseries\raggedright}{\par\vspace{\baselineskip}}
+\newenvironment{text}{\parindent=0em \parskip=\baselineskip \noindent \ignorespaces}{\par}
+\newenvironment{anschreiben}
+{
+  \daten % rechter Seitenrand
+  \begin{addmargin}[0mm]{\randbreite}
+}{
+  \end{addmargin}
+}
 
 % Absolute Positionierung von Inhalten (fuer Umgebung 'textblock'):
 \usepackage[absolute,
