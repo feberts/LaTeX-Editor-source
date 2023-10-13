@@ -16,12 +16,12 @@ Nach der Installation von TeXstudio muss *Biber* als Bibliographieprogramm ausge
 
 **Ubuntu**
 
-Installation über die Paketverwaltung in der Shell:
+Installation von *TeX Live* über die Paketverwaltung in der Shell:
 
     sudo apt-get install texlive texlive-lang-german texlive-latex-extra biber
 
-Installation des Editors TeXstudio:
+Installation des Editors *TeXstudio*:
 
     sudo apt-get install texstudio
 
-Wie oben beschrieben muss anschließend Biber konfiguriert werden.
+Wie oben beschrieben muss anschließend *Biber* konfiguriert werden.
