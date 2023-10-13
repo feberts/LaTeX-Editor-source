@@ -54,6 +54,7 @@ DOCS="$TARGET"/docs/ # web document root
 TEMPLATES=templates/ # latex templates
 WEB=web/             # website template
 SWIFT=swiftlatex/    # swiftlatex modules
+LATEXINSTALL=LaTeX-Install.md
 
 # ------------------------------------------------------------------------------
 #  generate website
@@ -171,3 +172,10 @@ fi
 # Technically this is NOT necessary. It only makes it easier to download a template without having to use the web frontend.
 
 cp -r "$TEMPLATES" "$TARGET"/Vorlagen
+
+# ------------------------------------------------------------------------------
+#  copy install instructions
+# ------------------------------------------------------------------------------
+
+cp "$LATEXINSTALL" "$TARGET"
+add_to_readme "\nAnleitung für die lokale Installation von LaTeX auf dem PC: [${LATEXINSTALL}](./${LATEXINSTALL})\n"
