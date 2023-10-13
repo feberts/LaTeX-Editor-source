@@ -5,7 +5,7 @@
 #
 #         USAGE: ./generate-website.sh TARGET REPO [DOMAIN]
 #
-#   DESCRIPTION: This script is executed by the github action to generate a
+#   DESCRIPTION: This script is executed by the github workflow to generate a
 #                website from the latex templates.
 #
 #       OPTIONS: TARGET   temporary target directory
