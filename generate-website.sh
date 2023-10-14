@@ -21,8 +21,10 @@
 #
 # ==============================================================================
 
-DEBUG=0 # For local debugging run: ./generate-website.sh remote_temp user/repo cname_entry
-        # This creates the web application in a local directory.
+DEBUG=0
+# for local debugging run literally:
+#   ./generate-website.sh remote_temp user/repo cname_entry
+# this will create the web application in a local directory named remote_temp
 
 function fatal
 {
@@ -172,6 +174,9 @@ fi
 # Technically this is NOT necessary. It only makes it easier to download a template without having to use the web frontend.
 
 cp -r "$TEMPLATES" "$TARGET"/Vorlagen
+
+# remove placeholder syntax elements (curly braces):
+find "$TARGET"/Vorlagen -type f -name *.tex | xargs sed -i -E 's/\{\{([^{}]+)\}\}/\1/g'
 
 # ------------------------------------------------------------------------------
 #  copy install instructions
