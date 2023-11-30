@@ -18,7 +18,7 @@ Nach der Installation von TeXstudio muss *Biber* als Bibliographieprogramm ausge
 
 Auf dem Mac wird TeX Live unter dem Namen *MacTeX* angeboten: [www.tug.org/mactex](https://www.tug.org/mactex/)
 
-Die Entwicklungsumgebung *TeXShop* ist bereits in MacTeX enthalten. Auf Wunsch kann TeXstudio [www.texstudio.org](https://www.texstudio.org/) nachinstalliert werden.
+Die Entwicklungsumgebung *TeXShop* ist bereits in MacTeX enthalten. Auf Wunsch kann TeXstudio ([www.texstudio.org](https://www.texstudio.org/)) nachinstalliert werden.
 
 **Ubuntu**
 
