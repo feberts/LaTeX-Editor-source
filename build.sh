@@ -180,3 +180,5 @@ find "$TARGET_DIR"/Vorlagen -type f -name *.tex | xargs sed -i -E 's/\{\{([^{}]+
 
 cp "$LATEXINSTALL" "$TARGET_DIR"
 add_to_readme "\nAnleitung für die lokale Installation von LaTeX auf dem PC: [${LATEXINSTALL}](./${LATEXINSTALL})\n"
+add_to_readme "\n"'### About'"\n\n"
+add_to_readme 'The purpose of this repository is to host the web application and to make the LaTeX templates available. The source code and the templates are maintained in a separate repository: [github.com/feberts/LaTeX-Editor-source](https://github.com/feberts/LaTeX-Editor-source)'
