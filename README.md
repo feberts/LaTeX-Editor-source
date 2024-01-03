@@ -1,56 +1,56 @@
 # LaTeX-Editor
 
-Dieses Projekt stellt einen webbasierten LaTeX-Editor und verschiedene LaTeX-Vorlagen bereit.
+This project provides a web-based LaTeX editor and various LaTeX templates. The editor supports client-side compilation of documents in the browser using WebAssembly.
 
-Die Webanwendung wird in einem separaten Repository gehostet: [github.com/feberts/LaTeX-Editor](https://github.com/feberts/LaTeX-Editor)
+The web application is hosted in a separate repository: [github.com/feberts/LaTeX-Editor](https://github.com/feberts/LaTeX-Editor)
 
-## Anlegen einer neuen Vorlage
+## Adding a new template
 
-1. Einen neuen Ordner mit den LaTeX-Projektdateien im Verzeichnis `templates` anlegen. Der Name des Ordners dient später in der Webanwendung als Name der Vorlage.
-1. Änderungen übernehmen und pushen. Ein GitHub-Workflow überführt die Vorlagen dann automatisch in das Ziel-Repository.
+1. Create a new folder with the LaTeX project files in the `templates` directory. The name of the folder will later serve as the name of the template in the web application.
+1. Commit and push changes. A GitHub workflow then automatically transfers the templates to the target repository.
 
-Auf dieselbe Weise findet auch das Deployment der Webanwendung statt. Änderungen oder Bugfixes werden entsprechend hier in diesem Repository durchgeführt.
+The web application is deployed in the same way. Accordingly, changes or bug fixes are performed here in this repository.
 
-## Verwendung von Platzhaltern
+## Using placeholders
 
-Im LaTeX-Dokument können Platzhalter verwendet werden, aus welchen die Webanwendung ein Formular erzeugt. Platzhalter werden in doppelte geschweifte Klammern gefasst:
+Placeholders can be used in the LaTeX document, from which the web application then generates a form. Placeholders are enclosed in double braces:
 
-- bspw. `{{Titel}}` oder `{{Name des Autors}}` für einfache Textfelder
-- bspw. `{{Abstract }}` für mehrzeilige Textfelder durch Anhängen eines Leerzeichens
+- e.g. `{{Title}}` or `{{Authors name}}` for simple text fields
+- e.g. `{{Abstract }}` for multi-line text fields by appending a space character
 
-Die Formularfelder unterstützen das Einfügen von LaTeX-Code.
+The form input fields accept LaTeX code.
 
-In den Platzhaltern können LaTeX-Zeilenumbrüche verwendet werden, zum Beispiel `{{MfG\\Bob}}`. In mehrzeiligen Eingabefeldern werden diese um tatsächliche Zeilenumbrüche ergänzt, wobei die Rückstriche erhalten bleiben.
+LaTeX line breaks can be used in the placeholders, for example `{{Regards\\Bob}}`. In multi-line text fields, the placeholder text is then actually broken into lines, while the backslashes are retained.
 
 ## About
 
-Dieses Projekt nutzt [SwiftLaTeX](https://github.com/SwiftLaTeX/SwiftLaTeX/) und WebAssembly für das clientseitige Kompilieren von LaTeX-Dokumenten im Webbrowser. Des Weiteren kommen [Texlive-Ondemand](https://github.com/SwiftLaTeX/Texlive-Ondemand), [Ace](https://ace.c9.io/) und [client-zip](https://github.com/Touffy/client-zip) zum Einsatz.
+This project uses [SwiftLaTeX](https://github.com/SwiftLaTeX/SwiftLaTeX/) and WebAssembly for client-side compilation of LaTeX documents in the web browser. Furthermore, [Texlive-Ondemand](https://github.com/SwiftLaTeX/Texlive-Ondemand), [Ace](https://ace.c9.io/) and [client-zip](https://github.com/Touffy/client-zip) are used.
 
 ## Setup
 
-Das Projekt beruht auf zwei Repositorys:
+The project is based on two repositories:
 
-- **Quell-Repository** (dieses Repository): LaTeX-Vorlagen, Quellcode der Webanwendung, Workflow für das Deployment
-- **Ziel-Repository**: Hier wird die Webanwendung mittels GitHub-Pages gehostet.
+- **Source repository (this repository):** LaTeX templates, source code of the web application, workflow for deployment
+- **Target repository:** This is where the web application is hosted using GitHub pages.
 
-Für das Deployment wird ein RSA-Schlüsselpaar benötigt.
+An RSA key pair is required for deployment.
 
-### Ziel-Repository
+### Target repository
 
-- GitHub-Pages einrichten und das Verzeichnis `/docs` als Document-Root wählen
-- den Public-Key als *deploy key* hinzufügen und die Option *allow write access* aktivieren (siehe `.github/workflows/deploy.yml`)
-- (optional: Custom-Domain einrichten; dazu muss beim Internet Service Provider folgender CNAME-Eintrag vorgenommen werden: `<gituser>.github.io.`)
+- set up GitHub pages and select the `/docs` directory as the document root
+- add the public key as *deploy key* and enable the option *allow write access* (see `.github/workflows/deploy.yml`)
+- (optional: set up a custom domain; to do this, the following CNAME entry must be configured with the internet service provider: `<gituser>.github.io.`)
 
-### Quell-Repository
+### Source repository
 
-- den Private-Key als *actions secret* mit dem Namen `ID_RSA` hinzufügen (siehe `.github/workflows/deploy.yml`)
-- in `.github/workflows/deploy.yml` das Ziel-Repository unter `REMOTE_REPO` eintragen
-- in `swiftlatex/texliveserver.js` die URL des TeXLive-On-Demand-Servers ändern, sofern ein abweichender Server verwendet werden soll
-- (bei Verwendung einer Custom-Domain wird diese in `.github/workflows/deploy.yml` unter `REMOTE_CUSTOM_URL` eingetragen; dadurch wird automatisch eine entsprechende `CNAME`-Datei erzeugt)
+- add the private key as an *actions secret* with the name `ID_RSA` (see `.github/workflows/deploy.yml`)
+- enter the target repository in `.github/workflows/deploy.yml` under `REMOTE_REPO`
+- change the URL of the TeXLive on-demand server in `swiftlatex/texliveserver.js` if a different server is to be used
+- (if a custom domain is used, this is entered in `.github/workflows/deploy.yml` under `REMOTE_CUSTOM_URL`; this automatically creates a corresponding `CNAME` file)
 
-### TeXLive-On-Demand-Server
+### TeXLive on-demand server
 
-Falls nicht der von [SwiftLaTeX](https://github.com/SwiftLaTeX/SwiftLaTeX) bereitgestellte Server verwendet werden soll, kann ein eigener Server mithilfe eines Docker-Containers betrieben werden:
+If you do not want to use the server provided by [SwiftLaTeX](https://github.com/SwiftLaTeX/SwiftLaTeX), you can set up your own server using a Docker container:
 
 ```
 git clone https://github.com/SwiftLaTeX/Texlive-Ondemand
@@ -59,4 +59,4 @@ sudo docker build --tag texondemand .
 sudo docker run --restart unless-stopped --detach -p 4711:5001 texondemand
 ```
 
-Die URL (bspw. `http://latex.example.net:4711/`) wird dann wie oben geschildert in `swiftlatex/texliveserver.js` eingetragen.
+The URL (e.g. `http://latex.example.net:4711/`) is then added to `swiftlatex/texliveserver.js` as described above.
